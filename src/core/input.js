@@ -33,6 +33,10 @@ export const Input = {
 };
 
 const DEADZONE = 0.22;
+const touchAim = { x: 0, y: -1, fire: false, used: false };
+window.addEventListener('touch-aim', e => {
+  Object.assign(touchAim, e.detail); touchAim.used = true;
+});
 
 export function initInput(canvas) {
   window.addEventListener('keydown', (e) => {
@@ -119,7 +123,11 @@ export function updateInput() {
     Input.stickAim.active = false;
   }
 
-  Input.fireHeld = Input.mouse.down || gp.fire;
+  if (touchAim.used && matchMedia('(any-pointer: coarse)').matches && !Input.usingGamepad) {
+    Input.stickAim.x = touchAim.x; Input.stickAim.y = touchAim.y;
+    Input.stickAim.active = true;
+  }
+  Input.fireHeld = Input.mouse.down || gp.fire || touchAim.fire;
   Input.grenadeJust = keysJust.has('Space') || gp.grenadeJust;
   Input.pauseJust = keysJust.has('Escape') || keysJust.has('KeyP') || gp.pauseJust;
   Input.confirmJust = keysJust.has('Enter') || gp.confirmJust;
