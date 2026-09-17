@@ -45,7 +45,7 @@ export class Game {
 
   resize() {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const w = window.innerWidth, h = window.innerHeight;
+    const w = window.innerWidth, h = document.getElementById("game-root").clientHeight || window.innerHeight;
     this.canvas.width = Math.round(w * dpr);
     this.canvas.height = Math.round(h * dpr);
     this.scaleCss = w / VIEW_W;                 // CSS px per logical unit
