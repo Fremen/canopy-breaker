@@ -121,3 +121,10 @@ run-and-gun arcade games. It contains no copyrighted names, characters, sprites,
 sounds, music, maps, or UI from any existing game.
 
 Released under the [MIT License](LICENSE).
+
+
+## Touch controls
+
+On touchscreen devices, controls appear below the game. Use the direction pad to move. Drag the circular aim control to aim and fire independently of movement. Grenade throws a grenade; Start confirms and Pause pauses. Multiple controls can be held together. Inputs release on cancelled touches or when switching away from the app. Landscape gives more horizontal room.
+
+The game viewport reserves space for the control panel and its safe-area padding. Mobile input lifecycle checks pass; physical iPhone Safari performance and playability still need device testing.
