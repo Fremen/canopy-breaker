@@ -10,6 +10,8 @@ copyrighted or otherwise, in the repository.
 
 [Play Canopy Breaker](https://fremen.github.io/canopy-breaker/)
 
+![Canopy Breaker title screen](docs/screenshot.jpg)
+
 ## Run it
 
 The game is plain static files, but ES modules require HTTP (not `file://`):
@@ -127,4 +129,4 @@ Released under the [MIT License](LICENSE).
 
 On touchscreen devices, controls appear below the game. Use the direction pad to move. Drag the circular aim control to aim and fire independently of movement. Grenade throws a grenade; Start confirms and Pause pauses. Multiple controls can be held together. Inputs release on cancelled touches or when switching away from the app. Landscape gives more horizontal room.
 
-The game viewport reserves space for the control panel and its safe-area padding. Mobile input lifecycle checks pass; physical iPhone Safari performance and playability still need device testing.
+The game viewport reserves space for the control panel and its safe-area padding. Touch controls and playability have been tested on iPhone Safari. Landscape gives the game and control panel more room.
