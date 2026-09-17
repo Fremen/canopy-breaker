@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CANOPY BREAKER — Run &amp; Gun</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="game-root">
+    <canvas id="game-canvas"></canvas>
+
+    <!-- DOM UI overlay: menus only. In-game HUD is canvas-rendered. -->
+    <div id="ui">
+
+      <!-- MAIN MENU -->
+      <div class="screen" id="screen-menu">
+        <div class="menu-panel">
+          <h1 class="title"><span>CANOPY</span><span class="title-red">BREAKER</span></h1>
+          <p class="tagline">ONE SOLDIER. ENEMY TERRITORY. NO RETREAT.</p>
+          <p class="best hidden" id="menu-best"></p>
+          <div class="btn-col">
+            <button class="btn btn-primary" id="btn-deploy">DEPLOY</button>
+            <button class="btn" id="btn-options">OPTIONS</button>
+            <button class="btn" id="btn-help">BRIEFING</button>
+          </div>
+          <p class="footnote">WASD MOVE &nbsp;•&nbsp; MOUSE AIM &nbsp;•&nbsp; LMB FIRE &nbsp;•&nbsp; SPACE GRENADE &nbsp;•&nbsp; GAMEPAD SUPPORTED</p>
+        </div>
+      </div>
+
+      <!-- OPTIONS -->
+      <div class="screen hidden" id="screen-options">
+        <div class="menu-panel panel-wide">
+          <h2>OPTIONS</h2>
+          <div class="opt-grid">
+            <label>MASTER VOLUME</label><input type="range" id="opt-master" min="0" max="1" step="0.05">
+            <label>MUSIC VOLUME</label><input type="range" id="opt-music" min="0" max="1" step="0.05">
+            <label>SFX VOLUME</label><input type="range" id="opt-sfx" min="0" max="1" step="0.05">
+            <label>SCREEN SHAKE</label><input type="range" id="opt-shake" min="0" max="1" step="0.1">
+            <label>DIFFICULTY</label>
+            <select id="opt-difficulty">
+              <option value="easy">RECRUIT (EASY)</option>
+              <option value="normal">SOLDIER (NORMAL)</option>
+              <option value="hard">VETERAN (HARD)</option>
+            </select>
+            <label>AUTO-FIRE</label><input type="checkbox" id="opt-autofire">
+            <label>AIM ASSIST</label><input type="checkbox" id="opt-aimassist">
+            <label>HIGH-CONTRAST PROJECTILES</label><input type="checkbox" id="opt-contrast">
+            <label>SLOW-MOTION EFFECTS</label><input type="checkbox" id="opt-slowmo">
+            <label>CONTROLLER RUMBLE</label><input type="checkbox" id="opt-rumble">
+            <label>RETRO CRT FILTER</label><input type="checkbox" id="opt-crt">
+          </div>
+          <div class="btn-col"><button class="btn" id="btn-options-back">BACK</button></div>
+        </div>
+      </div>
+
+      <!-- BRIEFING / HELP -->
+      <div class="screen hidden" id="screen-help">
+        <div class="menu-panel panel-wide">
+          <h2>MISSION BRIEFING</h2>
+          <div class="help-body">
+            <p><b>OBJECTIVE</b> — Push north through the jungle, cross the river, breach the fortified camp, and destroy the WARLORD armored patrol vehicle. Reach the extraction flare.</p>
+            <p><b>MOVE</b> — WASD / Arrow keys / left stick &nbsp;&nbsp; <b>AIM</b> — Mouse / right stick</p>
+            <p><b>FIRE</b> — Left mouse / right trigger &nbsp;&nbsp; <b>GRENADE</b> — Space / left trigger or bumper</p>
+            <p><b>PAUSE</b> — Esc / P / Start</p>
+            <p><b>INTEL</b> — Rifle ammo is unlimited. Grenades are not — crates and fallen foes resupply you. Free captive scouts for bonus points and gear. Chain kills quickly to build your combo multiplier. Barrels and crates explode: use them.</p>
+            <p><b>RANK</b> — Score, accuracy, speed, grenade efficiency and rescues decide your final grade: C, B, A or S.</p>
+          </div>
+          <div class="btn-col"><button class="btn" id="btn-help-back">BACK</button></div>
+        </div>
+      </div>
+
+      <!-- PAUSE -->
+      <div class="screen hidden" id="screen-pause">
+        <div class="menu-panel">
+          <h2>PAUSED</h2>
+          <div class="btn-col">
+            <button class="btn btn-primary" id="btn-resume">RESUME</button>
+            <button class="btn" id="btn-pause-options">OPTIONS</button>
+            <button class="btn" id="btn-restart">RESTART MISSION</button>
+            <button class="btn" id="btn-quit">ABANDON (MENU)</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- END SCREEN (game over + victory share this, content filled by JS) -->
+      <div class="screen hidden" id="screen-end">
+        <div class="menu-panel panel-wide">
+          <h2 id="end-title">MISSION COMPLETE</h2>
+          <p class="new-record hidden" id="end-record">★ NEW RECORD ★</p>
+          <div id="end-stats" class="end-stats"></div>
+          <div class="grade-row"><span id="end-grade" class="grade">A</span></div>
+          <div class="btn-col">
+            <button class="btn btn-primary" id="btn-end-restart">PLAY AGAIN</button>
+            <button class="btn" id="btn-end-menu">MAIN MENU</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="file-warning" class="hidden">
+      Serve this game over HTTP (modules are blocked on file://).<br>
+      Run <code>python3 -m http.server 8000</code> in the game folder, then open
+      <code>http://localhost:8000</code>.
+    </div>
+  </div>
+  <script>
+    if (location.protocol === 'file:') document.getElementById('file-warning').classList.remove('hidden');
+  </script>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

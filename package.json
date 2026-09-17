@@ -1,0 +1,12 @@
+{
+  "name": "canopy-breaker",
+  "version": "1.0.0",
+  "description": "Modern top-down vertical run-and-gun arcade shooter. Zero dependencies — HTML5 Canvas + WebAudio.",
+  "type": "module",
+  "scripts": {
+    "start": "python3 -m http.server 8000 --bind 127.0.0.1",
+    "start:lan": "python3 -m http.server 8000 --bind 0.0.0.0",
+    "start:node": "npx -y serve -l tcp://0.0.0.0:8000 ."
+  },
+  "license": "MIT"
+}
